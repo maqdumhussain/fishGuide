@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fish Buying Guide – UAE Market</title>
+  <meta name="description" content="Responsive, single-file handout on common UAE market fish with health, risk, and cooking guidance. Includes kid-friendly picks." />
+  <style>
+    :root {
+      --bg: #f4fbfd;             /* ocean-inspired background */
+      --ink: #0e2a2d;            /* deep text */
+      --muted: #3c5e61;          /* muted text */
+      --card: #ffffff;           /* cards */
+      --accent: #64c7cf;         /* aqua */
+      --accent-2: #8ed9c0;       /* mint */
+      --border: #cfe7ea;         /* borders */
+      --green: #dff6e3;          /* status green */
+      --yellow: #fff6cc;         /* status yellow */
+      --red: #ffe7e7;            /* status red */
+      --shadow: 0 8px 24px rgba(15, 43, 46, 0.08);
+      --radius: 14px;
+    }
+
+    html, body { background: var(--bg); color: var(--ink); font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; line-height: 1.55; }
+
+    /* Layout helpers */
+    .container { max-width: 1120px; margin: 0 auto; padding: 1rem; }
+    section[id] { scroll-margin-top: 84px; }
+
+    /* Topbar */
+    header.topbar { position: sticky; top: 0; z-index: 100; background: linear-gradient(180deg, #e9f6f9, #f6fbfd 70%); border-bottom: 1px solid var(--border); backdrop-filter: saturate(1.2) blur(6px); }
+    .topbar-inner { display:flex; gap:1rem; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+    .brand { display:flex; align-items:center; gap:.75rem; }
+    .brand .logo { width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); display: grid; place-items: center; color: white; font-weight: 800; box-shadow: var(--shadow); }
+    .brand h1 { font-size: clamp(1.05rem, 2.2vw, 1.4rem); margin: 0; }
+
+    .nav { display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; }
+    .nav a, .chip { text-decoration:none; color: var(--ink); background:white; border:1px solid var(--border); padding:.5rem .7rem; border-radius:999px; font-size:.9rem; box-shadow: var(--shadow); }
+    .nav a:hover { background:#ecfbff; }
+
+    .actions { display:flex; gap:.5rem; align-items:center; }
+    .btn { background: var(--accent); color: white; border: none; padding: .55rem .8rem; border-radius: 999px; cursor: pointer; font-weight: 600; box-shadow: var(--shadow); }
+    .btn.secondary { background: #e9f6f9; color: var(--ink); border: 1px solid var(--border); }
+
+    /* Hero / Intro */
+    .hero { display:grid; gap:1rem; grid-template-columns: 1.2fr .8fr; align-items: start; }
+    .hero > div { background: var(--card); padding: 1rem; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); }
+    .hero h2 { margin-top: 0; }
+    .legend .status { display:inline-flex; align-items:center; gap:.35rem; padding:.35rem .55rem; border-radius:999px; border:1px solid var(--border); font-size:.85rem; }
+    .status-green { background: var(--green); }
+    .status-yellow { background: var(--yellow); }
+    .status-red { background: var(--red); }
+    .chips { display:flex; gap:.5rem; overflow-x:auto; padding-bottom:.4rem; scrollbar-width:thin; }
+
+    /* Sections */
+    section { margin: 1.2rem 0; }
+    section.card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1rem; }
+
+    /* Fish Grid & Cards */
+    .grid { display:grid; grid-template-columns: repeat(12, 1fr); gap:1rem; }
+    .fish-card { grid-column: span 12; background: var(--card); border:1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow:hidden; display:grid; grid-template-columns: minmax(220px, 32%) 1fr; }
+    .fish-card img { width:100%; height:100%; object-fit:cover; background:#eaf7fa; }
+    .fish-card .content { padding:1rem; }
+    .fish-card h3 { margin:0 0 .25rem; display:flex; align-items:center; justify-content:space-between; gap:.75rem; }
+    .altname { color: var(--muted); font-size: .95rem; margin-bottom: .6rem; }
+    .pill { border-radius: 999px; padding: .3rem .6rem; border: 1px solid var(--border); }
+
+    details { border: 1px dashed var(--border); border-radius: 10px; padding: .4rem .6rem; background: #f9fefe; }
+    details + details { margin-top: .6rem; }
+    summary { font-weight: 700; cursor: pointer; }
+    .row { display:grid; grid-template-columns: repeat(2,1fr); gap:.6rem; }
+    .row .box { background:#fcffff; border:1px solid var(--border); border-radius:10px; padding:.6rem; }
+    .row ul { margin:0; padding-left:1.1rem; }
+
+    /* Table */
+    table.compare { width:100%; border-collapse:collapse; font-size:.95rem; }
+    .compare th, .compare td { border:1px solid var(--border); padding:.5rem .6rem; vertical-align:top; }
+    .compare th { background:#eef9fb; text-align:left; position:sticky; top:0; }
+    .nowrap { white-space:nowrap; }
+
+    /* Notes */
+    .muted { color: var(--muted); }
+    .note { font-size:.92rem; background:#f5fbff; border-left:4px solid var(--accent); padding:.6rem .8rem; border-radius:8px; }
+
+    /* Responsive */
+    @media (max-width: 980px) { .hero { grid-template-columns: 1fr; } .fish-card { grid-template-columns: 1fr; } }
+
+    /* Print-friendly (no fixed A4 sizing) */
+    @media print {
+      header.topbar, .chips, .actions { display:none !important; }
+      body { background:white; }
+      .fish-card, section.card { box-shadow:none !important; }
+      details { border:1px solid #ddd; }
+      details, .fish-card { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="logo">🐟</div>
+        <h1>Fish Buying Guide – UAE Market</h1>
+      </div>
+      <nav class="nav" aria-label="Quick links">
+        <a href="#intro">Intro</a>
+        <a href="#fresh">Freshness</a>
+        <a href="#kids">Kids-Friendly</a>
+        <a href="#health">Health Tips</a>
+        <a href="#sustain">Sustainability</a>
+        <a href="#fish">Fish List</a>
+        <a href="#summary">Comparison</a>
+      </nav>
+      <div class="actions">
+        <button class="btn secondary" id="expandAll" title="Expand all details">Expand All</button>
+        <button class="btn secondary" id="collapseAll" title="Collapse all details">Collapse All</button>
+        <button class="btn" onclick="window.print()">Print</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Intro / Hero -->
+    <section id="intro" class="hero">
+      <div>
+        <h2>Why fish? What to look for.</h2>
+        <p class="muted">Fish delivers <strong>high‑quality protein</strong>, <strong>omega‑3s</strong> (EPA/DHA), <strong>vitamin D</strong>, and <strong>B12</strong>. Choose smart to get benefits while managing risks like <em>mercury</em>, <em>bones</em>, and <em>overfishing</em>.</p>
+
+        <!-- Compact visual checklist -->
+        <div class="grid" style="margin-top:.5rem;">
+          <div class="card box" style="grid-column: span 6; display:flex; gap:.6rem; align-items:flex-start;">
+            <!-- eye icon -->
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 5c5 0 9 4.5 9 7s-4 7-9 7-9-4.5-9-7 4-7 9-7Z" stroke="#2f6f75" stroke-width="1.5"/><circle cx="12" cy="12" r="3.5" stroke="#2f6f75" stroke-width="1.5"/></svg>
+            <div>
+              <strong>Look</strong>
+              <div class="muted">Clear eyes, shiny scales, firm flesh that springs back.</div>
+            </div>
+          </div>
+          <div class="card box" style="grid-column: span 6; display:flex; gap:.6rem; align-items:flex-start;">
+            <!-- nose icon -->
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 2c.8 3 .8 5.5-1 7.5M15 2c-.8 3-.8 5.5 1 7.5M8 18c.5 2 2 3 4 3s3.5-1 4-3" stroke="#2f6f75" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <div>
+              <strong>Smell</strong>
+              <div class="muted">Fresh sea breeze—never sour or ammonia‑like.</div>
+            </div>
+          </div>
+          <div class="card box" style="grid-column: span 6; display:flex; gap:.6rem; align-items:flex-start;">
+            <!-- gills icon -->
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 12c4-4 12-4 16 0" stroke="#2f6f75" stroke-width="1.5"/><path d="M4 16c4-4 12-4 16 0" stroke="#2f6f75" stroke-width="1.5" opacity=".6"/></svg>
+            <div>
+              <strong>Gills</strong>
+              <div class="muted">Bright cherry red; avoid brown or slimy.</div>
+            </div>
+          </div>
+          <div class="card box" style="grid-column: span 6; display:flex; gap:.6rem; align-items:flex-start;">
+            <!-- snowflake/thermo icon -->
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3v18M5 7l14 10M19 7L5 17" stroke="#2f6f75" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <div>
+              <strong>Cold chain</strong>
+              <div class="muted">Kept on ice; cook soon. Histamine risk for tuna/mackerel/sardines.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="legend" style="margin-top:.6rem; display:flex; gap:.5rem; flex-wrap:wrap;">
+          <span class="status status-green">✅ Best choice</span>
+          <span class="status status-yellow">⚠️ Moderate concerns</span>
+          <span class="status status-red">⛔ Health/env risk</span>
+        </div>
+      </div>
+      <div>
+        <!-- Visual collage to avoid tall empty space -->
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:.6rem;">
+          <img src="https://source.unsplash.com/600x400/?fish,market" alt="Fish on ice at a market (Unsplash)" style="width:100%; height:180px; object-fit:cover; border-radius:10px; border:1px solid var(--border);"/>
+          <img src="https://source.unsplash.com/600x400/?seafood,ice" alt="Seafood on ice (Unsplash)" style="width:100%; height:180px; object-fit:cover; border-radius:10px; border:1px solid var(--border);"/>
+          <img src="https://source.unsplash.com/600x400/?sardines" alt="Sardines (Unsplash)" style="width:100%; height:180px; object-fit:cover; border-radius:10px; border:1px solid var(--border);"/>
+          <img src="https://source.unsplash.com/600x400/?mackerel,fish" alt="Mackerel (Unsplash)" style="width:100%; height:180px; object-fit:cover; border-radius:10px; border:1px solid var(--border);"/>
+        </div>
+        <div class="note" style="margin-top:.6rem;">Images load from Unsplash’s free random feed by keyword. Species may vary. Icons are inline SVGs for print‑friendliness.</div>
+      </div>
+    </section>
+
+    <!-- Freshness Tips -->
+    <section id="fresh" class="card">
+      <h2>🐟 How to Choose Fresh Fish</h2>
+      <div class="grid">
+        <div style="grid-column: span 12;" class="row">
+          <div class="box"><strong>👀 Eyes:</strong> Bright, bulging, not cloudy or sunken.</div>
+          <div class="box"><strong>👃 Smell:</strong> Fresh sea breeze; avoid ammonia/acidic odors.</div>
+          <div class="box"><strong>🎨 Gills:</strong> Cherry red; avoid brown or slimy.</div>
+          <div class="box"><strong>🧪 Flesh:</strong> Springs back when pressed; fillet edges not browning.</div>
+          <div class="box"><strong>🧊 Cold Chain:</strong> On ice, not submerged; ask when it arrived.</div>
+          <div class="box"><strong>🏷️ Labels:</strong> Species, origin, farmed/wild, certifications (ASC/MSC) if available.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kids Friendly -->
+    <section id="kids" class="card">
+      <h2>🧒 Kid‑Friendly Picks</h2>
+      <p class="muted">For children, prioritize <strong>low‑mercury</strong> fish with <strong>few bones</strong> and gentle flavors. Serve in small, well‑cooked pieces and always check for pin bones.</p>
+      <div class="grid">
+        <div class="fish-card" style="grid-column: span 12; grid-template-columns: 200px 1fr;">
+          <img src="https://placehold.co/500x360?text=Salmon" alt="Salmon fillet" />
+          <div class="content">
+            <h3>Salmon <span class="pill status-green">✅ Best</span></h3>
+            <div class="altname">Low mercury · High omega‑3 · Fillet-friendly</div>
+            <ul>
+              <li><strong>Why good:</strong> Soft texture, easy to flake; omega‑3 for brain/eyes.</li>
+              <li><strong>How to cook:</strong> Bake or steam; remove pin bones.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="fish-card" style="grid-column: span 12; grid-template-columns: 200px 1fr;">
+          <img src="https://placehold.co/500x360?text=Seabass" alt="Seabass fillet" />
+          <div class="content">
+            <h3>Seabass <span class="pill status-green">✅ Best</span></h3>
+            <div class="altname">Mild flavor · Few bones</div>
+            <ul>
+              <li><strong>Why good:</strong> Gentle taste, firm flakes, easy to de-bone.</li>
+              <li><strong>How to cook:</strong> Steam or bake with minimal spice.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="fish-card" style="grid-column: span 12; grid-template-columns: 200px 1fr;">
+          <img src="https://placehold.co/500x360?text=Tilapia" alt="Tilapia fillet" />
+          <div class="content">
+            <h3>Tilapia <span class="pill status-yellow">⚠️ Moderate</span></h3>
+            <div class="altname">Low mercury · Budget‑friendly</div>
+            <ul>
+              <li><strong>Why consider:</strong> Mild taste; choose reputable farms.</li>
+              <li><strong>Note:</strong> Lower omega‑3 than oily fish.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="note" style="grid-column: span 12;">
+          <strong>Be cautious with bones:</strong> Sardines and Rahu are nutritious but contain many small bones—serve only when meticulously prepared for younger kids.
+        </div>
+      </div>
+    </section>
+
+    <!-- Health Tips -->
+    <section id="health" class="card">
+      <h2>🍽️ General Health Tips</h2>
+      <ul>
+        <li>Aim for <strong>2 servings/week</strong> of fish; include at least one oily fish (sardine, mackerel, salmon).</li>
+        <li><strong>Pregnant/breastfeeding:</strong> choose low‑mercury (sardine, salmon, tilapia, small mackerel); limit high‑mercury (large kingfish, tuna steaks).</li>
+        <li><strong>Allergies:</strong> fish vs shellfish allergies differ; introduce cautiously.</li>
+        <li><strong>Raw/undercooked:</strong> risk of parasites; use sushi‑grade or cook thoroughly.</li>
+      </ul>
+    </section>
+
+    <!-- Sustainability -->
+    <section id="sustain" class="card">
+      <h2>🌍 Sustainability Note (UAE)</h2>
+      <p>Some local species face heavy pressure. <strong>Hamour (grouper)</strong> is widely considered <em>overfished</em>; consider alternatives like <strong>seabass</strong> or <strong>sheri</strong>. Watch for <strong>seasonal bans</strong> (e.g., kingfish). Prefer certified farmed options (ASC/MSC) when possible.</p>
+    </section>
+
+    <!-- Fish Cards -->
+    <section id="fish">
+      <h2>🧭 Fish by Name</h2>
+
+      <!-- Kingfish (Kanad) -->
+      <article class="fish-card" id="kingfish">
+        <img src="https://source.unsplash.com/800x600/?spanish%20mackerel,kingfish" alt="Kingfish / Spanish mackerel (royalty‑free Unsplash)" />
+        <div class="content">
+          <h3>Kingfish <span class="muted">(Kanad / Narrow‑barred Spanish mackerel)</span> <span class="pill status-yellow">⚠️ Moderate</span></h3>
+          <div class="altname">Local: Kanad · English: Kingfish / Spanish mackerel</div>
+          <details open>
+            <summary>Details</summary>
+            <div class="row" style="margin-top:.6rem;">
+              <div class="box"><strong>✅ Positive:</strong>
+                <ul><li>Meaty steaks for grill/BBQ.</li><li>Good protein, B12, selenium, omega‑3.</li></ul>
+              </div>
+              <div class="box"><strong>⚠️ Concerns:</strong>
+                <ul><li><strong>Mercury</strong> higher in large fish—limit for kids/pregnancy.</li><li>Seasonal catch rules; sustainability varies.</li></ul>
+              </div>
+              <div class="box"><strong>🍴 Best cooking:</strong> Grill, BBQ, curry, fry.</div>
+              <div class="box"><strong>🦴 Bones:</strong> Few big bones (steak vertebra).</div>
+              <div class="box"><strong>💪 Nutrients:</strong> Protein, omega‑3, B12, selenium.</div>
+              <div class="box"><strong>⛔ Risks:</strong> Mercury; <em>scombroid</em> (histamine) if poorly chilled.</div>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <!-- Sheri (Emperor Bream) -->
+      <article class="fish-card" id="sheri">
+        <img src="https://source.unsplash.com/800x600/?emperor%20bream,fish" alt="Sheri / Emperor bream (Unsplash)" />
+        <div class="content">
+          <h3>Sheri <span class="muted">(Emperor Bream)</span> <span class="pill status-yellow">⚠️ Moderate</span></h3>
+          <div class="altname">Local: Sheri · English: Emperor bream</div>
+          <details>
+            <summary>Details</summary>
+            <div class="row" style="margin-top:.6rem;">
+              <div class="box"><strong>✅ Positive:</strong>
+                <ul><li>Mild, slightly sweet; family-friendly.</li><li>Versatile: whole or fillet.</li></ul>
+              </div>
+              <div class="box"><strong>⚠️ Concerns:</strong>
+                <ul><li>Moderate bones; check size/season rules.</li><li>Sustainability varies by stock.</li></ul>
+              </div>
+              <div class="box"><strong>🍴 Best cooking:</strong> Grill, bake, curry, fry.</div>
+              <div class="box"><strong>🦴 Bones:</strong> Moderate; fillet-friendly.</div>
+              <div class="box"><strong>💪 Nutrients:</strong> Protein, B12, selenium; omega‑3 moderate.</div>
+              <div class="box"><strong>⛔ Risks:</strong> Small bones (choking hazard for kids).</div>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <!-- Hamour (Grouper) -->
+      <article class="fish-card" id="hamour">
+        <img src="https://source.unsplash.com/800x600/?grouper,reef%20fish" alt="Hamour / Grouper (Unsplash)" />
+        <div class="content">
+          <h3>Hamour <span class="muted">(Grouper)</span> <span class="pill status-red">⛔ Environmental</span></h3>
+          <div class="altname">Local: Hamour · English: Grouper</div>
+          <details>
+            <summary>Details</summary>
+            <div class="row" style="margin-top:.6rem;">
+              <div class="box"><strong>✅ Positive:</strong>
+                <ul><li>Delicate, mild flavor; firm flakes.</li><li>Few bones; easy for kids.</li></ul>
+              </div>
+              <div class="box"><strong>⚠️ Concerns:</strong>
+                <ul><li><strong>Overfishing</strong> locally—consider alternatives.</li><li>Occasional mislabeling; verify source.</li></ul>
+              </div>
+              <div class="box"><strong>🍴 Best cooking:</strong> Grill, pan-sear, curry, steam.</div>
+              <div class="box"><strong>🦴 Bones:</strong> Few big bones; fillet/steak friendly.</div>
+              <div class="box"><strong>💪 Nutrients:</strong> Protein, B12, potassium; omega‑3 moderate.</div>
+              <div class="box"><strong>⛔ Risks:</strong> Environmental pressure; rare <em>ciguatera</em> risk in large reef fish.</div>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <!-- Sardines -->
+      <article class="fish-card" id="sardines">
+        <img src="https://source.unsplash.com/800x600/?sardines" alt="Sardines (Unsplash)" />
+        <div class="content">
+          <h3>Sardines <span class="pill status-green">✅ Best</span></h3>
+          <div class="altname">Local: Sardin · English: Sardines</div>
+          <details>
+            <summary>Details</summary>
+            <div class="row" style="margin-top:.6rem;">
+              <div class="box"><strong>✅ Positive:</strong>
+                <ul><li>Very high omega‑3; budget-friendly.</li><li>Edible bones add <strong>calcium</strong> & vitamin D.</li></ul>
+              </div>
+              <div class="box"><strong>⚠️ Concerns:</strong>
+                <ul><li>Many small bones (often edible when cooked well).</li><li>Strong aroma; ultra-freshness matters.</li></ul>
+              </div>
+              <div class="box"><strong>🍴 Best cooking:</strong> Fry, grill, curry.</div>
+              <div class="box"><strong>🦴 Bones:</strong> Many small bones.</div>
+              <div class="box"><strong>💪 Nutrients:</strong> Protein, omega‑3, calcium, vitamin D, B12.</div>
+              <div class="box"><strong>⛔ Risks:</strong> <em>Scombroid</em> (histamine) if mishandled.</div>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <!-- Mackerel -->
+      <article class="fish-card" id="mackerel">
+        <img src="https://source.unsplash.com/800x600/?mackerel,fish" alt="Mackerel (Unsplash)" />
+        <div class="content">
+          <h3>Mackerel <span class="pill status-yellow">⚠️ Moderate</span></h3>
+          <div class="altname">Local: Bayah / Ayala (varies) · English: Mackerel</div>
+          <details>
+            <summary>Details</summary>
+            <div class="row" style="margin-top:.6rem;">
+              <div class="box"><strong>✅ Positive:</strong>
+                <ul><li>High omega‑3; rich taste; affordable.</li><li>Great for quick fries and curries.</li></ul>
+              </div>
+              <div class="box"><strong>⚠️ Concerns:</strong>
+                <ul><li>Histamine risk if not kept cold.</li><li>Mercury depends on species (avoid large king mackerel).</li></ul>
+              </div>
+              <div class="box"><strong>🍴 Best cooking:</strong> Fry, grill, curry, smoke.</div>
+              <div class="box"><strong>🦴 Bones:</strong> Many small bones; filleting helps.</div>
+              <div class="box"><strong>💪 Nutrients:</strong> Protein, omega‑3, vitamin D, B12, selenium.</div>
+              <div class="box"><strong>⛔ Risks:</strong> Histamine; mercury (species-dependent).</div>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <!-- Seabass -->
+      <article class="fish-card" id="seabass">
+        <img src="https://source.unsplash.com/800x600/?barramundi,seabass" alt="Seabass / Barramundi (Unsplash)" />
+        <div class="content">
+          <h3>Seabass <span class="pill status-green">✅ Best</span></h3>
+          <div class="altname">Often barramundi or European seabass</div>
+          <details>
+            <summary>Details</summary>
+            <div class="row" style="margin-top:.6rem;">
+              <div class="box"><strong>✅ Positive:</strong>
+                <ul><li>Mild, flaky; great for kids.</li><li>Farmed options with decent omega‑3 (choose ASC/MSC).</li></ul>
+              </div>
+              <div class="box"><strong>⚠️ Concerns:</strong>
+                <ul><li>Quality varies by farm; ask source/certification.</li><li>Price higher than tilapia.</li></ul>
+              </div>
+              <div class="box"><strong>🍴 Best cooking:</strong> Steam, bake, grill, pan-sear.</div>
+              <div class="box"><strong>🦴 Bones:</strong> Few; fillet-friendly.</div>
+              <div class="box"><strong>💪 Nutrients:</strong> Protein, omega‑3 (moderate), B12, vitamin D.</div>
+              <div class="box"><strong>⛔ Risks:</strong> Farm chemical concerns if poorly regulated; microplastics.</div>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <!-- Tilapia -->
+      <article class="fish-card" id="tilapia">
+        <img src="https://source.unsplash.com/800x600/?tilapia,fish" alt="Tilapia (Unsplash)" />
+        <div class="content">
+          <h3>Tilapia <span class="pill status-yellow">⚠️ Moderate</span></h3>
+          <div class="altname">Commonly farmed</div>
+          <details>
+            <summary>Details</summary>
+            <div class="row" style="margin-top:.6rem;">
+              <div class="box"><strong>✅ Positive:</strong>
+                <ul><li>Very affordable; mild taste; widely available.</li><li>Low mercury.</li></ul>
+              </div>
+              <div class="box"><strong>⚠️ Concerns:</strong>
+                <ul><li>Lower omega‑3 vs oily fish.</li><li>Farm practices vary—prefer certified sources.</li></ul>
+              </div>
+              <div class="box"><strong>🍴 Best cooking:</strong> Fry, curry, bake, grill.</div>
+              <div class="box"><strong>🦴 Bones:</strong> Fillet-friendly; few small bones.</div>
+              <div class="box"><strong>💪 Nutrients:</strong> Protein, B12, selenium.</div>
+              <div class="box"><strong>⛔ Risks:</strong> Farming chemicals/antibiotics (poorly regulated sources).</div>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <!-- Rahu (Indian Carp) -->
+      <article class="fish-card" id="rahu">
+        <img src="https://source.unsplash.com/800x600/?rohu,carp,fish" alt="Rahu / Rohu carp (Unsplash)" />
+        <div class="content">
+          <h3>Rahu <span class="muted">(Indian Carp)</span> <span class="pill status-yellow">⚠️ Moderate</span></h3>
+          <div class="altname">Local: Rahu/Rohu · English: Indian carp</div>
+          <details>
+            <summary>Details</summary>
+            <div class="row" style="margin-top:.6rem;">
+              <div class="box"><strong>✅ Positive:</strong>
+                <ul><li>Rich taste for curries/biryani; economical.</li></ul>
+              </div>
+              <div class="box"><strong>⚠️ Concerns:</strong>
+                <ul><li>Many fine bones; take care with children.</li><li>Often pond‑farmed; quality varies.</li></ul>
+              </div>
+              <div class="box"><strong>🍴 Best cooking:</strong> Curry, biryani, fry.</div>
+              <div class="box"><strong>🦴 Bones:</strong> Many small bones.</div>
+              <div class="box"><strong>💪 Nutrients:</strong> Protein, B12; omega‑3 low‑moderate.</div>
+              <div class="box"><strong>⛔ Risks:</strong> Bones (choking), farm chemical concerns.</div>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <!-- Black Pomfret -->
+      <article class="fish-card" id="pomfret-black">
+        <img src="https://source.unsplash.com/800x600/?black%20pomfret,fish" alt="Black Pomfret (Unsplash)" />
+        <div class="content">
+          <h3>Black Pomfret <span class="pill status-yellow">⚠️ Moderate</span></h3>
+          <div class="altname">Local: Safi / Paplet (black) · English: Black pomfret</div>
+          <details>
+            <summary>Details</summary>
+            <div class="row" style="margin-top:.6rem;">
+              <div class="box"><strong>✅ Positive:</strong>
+                <ul><li>Delicate, buttery flesh; family‑friendly.</li><li>Few medium bones; easy to eat.</li></ul>
+              </div>
+              <div class="box"><strong>⚠️ Concerns:</strong>
+                <ul><li>Pricey at times; availability can vary.</li><li>Mercury generally moderate; source matters.</li></ul>
+              </div>
+              <div class="box"><strong>🍴 Best cooking:</strong> Shallow‑fry, grill, steam, curry.</div>
+              <div class="box"><strong>🦴 Bones:</strong> Few medium bones; fillet‑friendly.</div>
+              <div class="box"><strong>💪 Nutrients:</strong> Protein, omega‑3 (moderate), B12.</div>
+              <div class="box"><strong>⛔ Risks:</strong> Mercury (moderate), sustainability varies.</div>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <!-- Silver Pomfret -->
+      <article class="fish-card" id="pomfret-silver">
+        <img src="https://source.unsplash.com/800x600/?pomfret,fish" alt="Silver Pomfret (Unsplash)" />
+        <div class="content">
+          <h3>Silver Pomfret <span class="pill status-yellow">⚠️ Moderate</span></h3>
+          <div class="altname">Local: Paplet (silver) · English: Silver pomfret</div>
+          <details>
+            <summary>Details</summary>
+            <div class="row" style="margin-top:.6rem;">
+              <div class="box"><strong>✅ Positive:</strong>
+                <ul><li>Very mild, clean flavor; popular for steaming.</li></ul>
+              </div>
+              <div class="box"><strong>⚠️ Concerns:</strong>
+                <ul><li>Pricey; often imported; seasonal supply.</li><li>Sustainability depends on fishery.</li></ul>
+              </div>
+              <div class="box"><strong>🍴 Best cooking:</strong> Steam, shallow‑fry, curry.</div>
+              <div class="box"><strong>🦴 Bones:</strong> Few medium bones; fillet‑friendly.</div>
+              <div class="box"><strong>💪 Nutrients:</strong> Protein, omega‑3 (moderate), B12.</div>
+              <div class="box"><strong>⛔ Risks:</strong> Mercury (moderate), supply variability.</div>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <!-- Salmon -->
+      <article class="fish-card" id="salmon">
+        <img src="https://source.unsplash.com/800x600/?salmon,fillet" alt="Salmon fillet (Unsplash)" />
+        <div class="content">
+          <h3>Salmon <span class="pill status-green">✅ Best</span></h3>
+          <div class="altname">Commonly farmed Atlantic salmon</div>
+          <details>
+            <summary>Details</summary>
+            <div class="row" style="margin-top:.6rem;">
+              <div class="box"><strong>✅ Positive:</strong>
+                <ul><li>Very high omega‑3; vitamin D powerhouse.</li><li>Versatile fillets; family‑friendly flavor.</li></ul>
+              </div>
+              <div class="box"><strong>⚠️ Concerns:</strong>
+                <ul><li>Farm practices vary—choose ASC/MSC when possible.</li><li>Allergies; raw requires sashimi‑grade handling.</li></ul>
+              </div>
+              <div class="box"><strong>🍴 Best cooking:</strong> Bake, grill, pan‑sear, steam; sushi/sashimi if safe source.</div>
+              <div class="box"><strong>🦴 Bones:</strong> Fillet-friendly; remove pin bones.</div>
+              <div class="box"><strong>💪 Nutrients:</strong> Protein, omega‑3 (high), vitamin D, B12, selenium.</div>
+              <div class="box"><strong>⛔ Risks:</strong> Parasites in wild if eaten raw; farm contaminants if poorly regulated.</div>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <!-- Tuna -->
+      <article class="fish-card" id="tuna">
+        <img src="https://source.unsplash.com/800x600/?tuna,steak" alt="Tuna steak (Unsplash)" />
+        <div class="content">
+          <h3>Tuna <span class="pill status-red">⛔ Mercury</span></h3>
+          <div class="altname">Species vary: Skipjack (lower mercury), Yellowfin (moderate), Albacore/Bigeye (higher)</div>
+          <details>
+            <summary>Details</summary>
+            <div class="row" style="margin-top:.6rem;">
+              <div class="box"><strong>✅ Positive:</strong>
+                <ul><li>Meaty steaks; high protein; versatile.</li></ul>
+              </div>
+              <div class="box"><strong>⚠️ Concerns:</strong>
+                <ul><li><strong>High mercury</strong> in larger species—limit for kids/pregnancy.</li><li>Histamine risk if warm‑handled.</li><li>Sustainability varies—prefer skipjack or certified sources.</li></ul>
+              </div>
+              <div class="box"><strong>🍴 Best cooking:</strong> Grill, sear, curry; sushi/sashimi only from trusted sources.</div>
+              <div class="box"><strong>🦴 Bones:</strong> Fillet-friendly; few bones.</div>
+              <div class="box"><strong>💪 Nutrients:</strong> Protein, omega‑3, B12, selenium.</div>
+              <div class="box"><strong>⛔ Risks:</strong> Mercury (notably in big tuna); histamine.</div>
+            </div>
+          </details>
+        </div>
+      </article>
+    </section>
+
+    <!-- Comparison Table -->
+    <section id="summary" class="card">
+      <h2>📊 Summary Comparison</h2>
+      <div class="note">Color indicates overall guidance considering nutrition, mercury, bones, and sustainability. Prefer fresher, local or certified options when possible.</div>
+      <div style="overflow:auto; margin-top:.6rem;">
+        <table class="compare">
+          <thead>
+            <tr>
+              <th>Fish</th>
+              <th>Status</th>
+              <th class="nowrap">Bones</th>
+              <th>Best Cooking</th>
+              <th>Key Nutrients</th>
+              <th>Main Concerns</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Kingfish (Kanad)</td><td class="status-yellow">⚠️ Moderate</td><td>Few big bones (steaks)</td><td>Grill, BBQ, curry, fry</td><td>Protein, omega‑3, B12, selenium</td><td>High mercury in large fish; histamine if mishandled</td></tr>
+            <tr><td>Sheri (Emperor Bream)</td><td class="status-yellow">⚠️ Moderate</td><td>Moderate; fillet‑friendly</td><td>Grill, bake, curry, fry</td><td>Protein, B12, selenium</td><td>Bones; sustainability varies</td></tr>
+            <tr><td>Hamour (Grouper)</td><td class="status-red">⛔ Environmental</td><td>Few big bones</td><td>Grill, curry, steam</td><td>Protein, B12, potassium</td><td>Overfishing; possible ciguatera (large reef fish)</td></tr>
+            <tr><td>Sardines</td><td class="status-green">✅ Best</td><td>Many small bones</td><td>Fry, grill, curry</td><td>Omega‑3, calcium, vitamin D, B12</td><td>Histamine if not kept cold</td></tr>
+            <tr><td>Mackerel</td><td class="status-yellow">⚠️ Moderate</td><td>Many small bones</td><td>Fry, grill, curry, smoke</td><td>Omega‑3, vitamin D, B12</td><td>Histamine; mercury depends on species</td></tr>
+            <tr><td>Seabass</td><td class="status-green">✅ Best</td><td>Few; fillet‑friendly</td><td>Steam, bake, grill</td><td>Protein, omega‑3 (moderate), vitamin D</td><td>Farm practices vary</td></tr>
+            <tr><td>Tilapia</td><td class="status-yellow">⚠️ Moderate</td><td>Few; fillet‑friendly</td><td>Fry, curry, bake</td><td>Protein, B12</td><td>Lower omega‑3; farm quality varies</td></tr>
+            <tr><td>Rahu (Indian Carp)</td><td class="status-yellow">⚠️ Moderate</td><td>Many small bones</td><td>Curry, biryani, fry</td><td>Protein, B12</td><td>Bones; farm chemical concerns</td></tr>
+            <tr><td>Black Pomfret</td><td class="status-yellow">⚠️ Moderate</td><td>Few medium bones</td><td>Steam, shallow‑fry, grill</td><td>Protein, omega‑3 (moderate)</td><td>Price; mercury/sustainability vary</td></tr>
+            <tr><td>Silver Pomfret</td><td class="status-yellow">⚠️ Moderate</td><td>Few medium bones</td><td>Steam, shallow‑fry</td><td>Protein, omega‑3 (moderate)</td><td>Imported/seasonal; sustainability varies</td></tr>
+            <tr><td>Salmon</td><td class="status-green">✅ Best</td><td>Fillet‑friendly</td><td>Bake, grill, sear, steam</td><td>Omega‑3 (high), vitamin D, B12</td><td>Farm practices; parasites if wild & raw</td></tr>
+            <tr><td>Tuna</td><td class="status-red">⛔ Mercury</td><td>Fillet‑friendly</td><td>Grill, sear, curry</td><td>Protein, omega‑3, B12</td><td>High mercury (large species); histamine</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="muted" style="font-size:.9rem;">
+      Last updated: 02 Sep 2025 · Region: UAE · Educational handout – not medical advice.
+    </section>
+  </main>
+
+  <script>
+    // Expand/Collapse all <details>
+    const expandAllBtn = document.getElementById('expandAll');
+    const collapseAllBtn = document.getElementById('collapseAll');
+    expandAllBtn?.addEventListener('click', () => { document.querySelectorAll('details').forEach(d => d.open = true); });
+    collapseAllBtn?.addEventListener('click', () => { document.querySelectorAll('details').forEach(d => d.open = false); });
+
+    // Smooth scroll for in-page anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        const el = document.querySelector(id);
+        if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+  </script>
+</body>
+</html>
